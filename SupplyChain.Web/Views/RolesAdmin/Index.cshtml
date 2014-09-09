@@ -1,0 +1,23 @@
+﻿@model IEnumerable<SupplyChain.Web.Models.ApplicationRole>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+
+
+@if(Model != null && Model.Count() > 0){
+
+    @Html.Partial("_RolesList", Model)
+}
+else { 
+    <h2>No roles were found</h2>
+}
+
+
+
