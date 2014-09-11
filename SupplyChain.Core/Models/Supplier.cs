@@ -7,6 +7,10 @@ namespace SupplyChain.Core.Models
 {
     public class Supplier : BusinessPartner
     {
+        public Supplier() : base()
+        {
+
+        }
 
         public ICollection<Product> Products {get; set; }
     }

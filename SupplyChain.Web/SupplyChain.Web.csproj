@@ -182,8 +182,9 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Areas\BusinessPartner\BusinessPartnerAreaRegistration.cs" />
-    <Compile Include="Areas\BusinessPartner\Controllers\CustomerController.cs" />
-    <Compile Include="Areas\BusinessPartner\Controllers\SupplierController.cs" />
+    <Compile Include="Areas\BusinessPartner\Controllers\CustomersController.cs" />
+    <Compile Include="Areas\BusinessPartner\Controllers\ProductsController.cs" />
+    <Compile Include="Areas\BusinessPartner\Controllers\SuppliersController.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
@@ -206,8 +207,6 @@
     <Compile Include="Models\ApplicationUserManager.cs" />
     <Compile Include="Models\ApplicationUserRole.cs" />
     <Compile Include="Models\ApplicationUserStore.cs" />
-    <Compile Include="Models\DataContext.cs" />
-    <Compile Include="Models\DataInitializer.cs" />
     <Compile Include="Models\EditUserViewModel.cs" />
     <Compile Include="Models\EmailService.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -223,7 +222,6 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App_Data\Database.sdf" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -238,6 +236,23 @@
     <Content Include="Content\bootstrap-theme.css.map" />
     <Content Include="Content\bootstrap.css.map" />
     <Content Include="Areas\BusinessPartner\Views\web.config" />
+    <Content Include="Areas\BusinessPartner\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\BusinessPartner\Views\Shared\_Layout.cshtml" />
+    <Content Include="Areas\BusinessPartner\Views\Customers\Create.cshtml" />
+    <Content Include="Areas\BusinessPartner\Views\Customers\Delete.cshtml" />
+    <Content Include="Areas\BusinessPartner\Views\Customers\Details.cshtml" />
+    <Content Include="Areas\BusinessPartner\Views\Customers\Edit.cshtml" />
+    <Content Include="Areas\BusinessPartner\Views\Customers\Index.cshtml" />
+    <Content Include="Areas\BusinessPartner\Views\Products\Create.cshtml" />
+    <Content Include="Areas\BusinessPartner\Views\Products\Delete.cshtml" />
+    <Content Include="Areas\BusinessPartner\Views\Products\Details.cshtml" />
+    <Content Include="Areas\BusinessPartner\Views\Products\Edit.cshtml" />
+    <Content Include="Areas\BusinessPartner\Views\Products\Index.cshtml" />
+    <Content Include="Areas\BusinessPartner\Views\Suppliers\Create.cshtml" />
+    <Content Include="Areas\BusinessPartner\Views\Suppliers\Delete.cshtml" />
+    <Content Include="Areas\BusinessPartner\Views\Suppliers\Details.cshtml" />
+    <Content Include="Areas\BusinessPartner\Views\Suppliers\Edit.cshtml" />
+    <Content Include="Areas\BusinessPartner\Views\Suppliers\Index.cshtml" />
     <None Include="_bin_deployableAssemblies\x86\sqlcese40.dll" />
     <None Include="_bin_deployableAssemblies\x86\sqlceqp40.dll" />
     <None Include="_bin_deployableAssemblies\x86\sqlceme40.dll" />
@@ -325,14 +340,24 @@
     <None Include="_bin_deployableAssemblies\x86\Microsoft.VC90.CRT\Microsoft.VC90.CRT.manifest" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="App_Data\" />
     <Folder Include="Areas\BusinessPartner\Models\" />
     <Folder Include="Areas\BusinessPartner\Views\Customer\" />
-    <Folder Include="Areas\BusinessPartner\Views\Shared\" />
     <Folder Include="Areas\BusinessPartner\Views\Supplier\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
     <None Include="Project_Readme.html" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\SupplyChain.Core\SupplyChain.Core.csproj">
+      <Project>{e4579820-cd71-4aea-b8da-4548e50d6e79}</Project>
+      <Name>SupplyChain.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SupplyChain.Infrastructure\SupplyChain.Infrastructure.csproj">
+      <Project>{b1b67a10-3bc7-437f-95af-ea2450776d83}</Project>
+      <Name>SupplyChain.Infrastructure</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

@@ -6,13 +6,10 @@ using System.Threading.Tasks;
 
 namespace SupplyChain.Core.Models
 {
-    public class Customer : BusinessPartner
+    public interface ILog
     {
-        public Customer(): base()
-        {
+        DateTime LastModified { get; set; }
 
-        }
-
-        public ICollection<SalesOrderHeader> SalesOrder { get; set; }
+        DateTime CreatedAt { get; set; }
     }
 }

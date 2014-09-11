@@ -41,7 +41,10 @@
   <ItemGroup>
     <Compile Include="Models\BusinessPartner.cs" />
     <Compile Include="Models\Customer.cs" />
+    <Compile Include="Models\ILog.cs" />
     <Compile Include="Models\Product.cs" />
+    <Compile Include="Models\SalesOrderDetail.cs" />
+    <Compile Include="Models\SalesOrderHeader.cs" />
     <Compile Include="Models\Supplier.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
