@@ -14,11 +14,17 @@ namespace SupplyChain.Web.Areas.BusinessPartner.Controllers
     public class CustomersController : Controller
     {
         private SupplyChainContext db = new SupplyChainContext();
+        private IRepository repository = new Repository();
 
         // GET: BusinessPartner/Customers
         public ActionResult Index()
         {
-            return View(db.Customers.ToList());
+            var x = this.repository.GetAll<SalesOrderHeader>().ToList();
+          
+            var customers = //this.repository.GetAll<Customer>();
+            new Repository().All123<Customer>(m => m.SalesOrder);
+            return View(customers);
+            //return View(db.Customers.ToList());
         }
 
         // GET: BusinessPartner/Customers/Details/5
@@ -51,8 +57,10 @@ namespace SupplyChain.Web.Areas.BusinessPartner.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Customers.Add(customer);
-                db.SaveChanges();
+                //db.Customers.Add(customer);
+                //db.SaveChanges();
+                this.repository.Add<Customer>(customer);
+                this.repository.Save();
                 return RedirectToAction("Index");
             }
 
@@ -66,7 +74,8 @@ namespace SupplyChain.Web.Areas.BusinessPartner.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Customer customer = db.Customers.Find(id);
+            //Customer customer = db.Customers.Find(id);
+            Customer customer = this.repository.Find<Customer>(id);
             if (customer == null)
             {
                 return HttpNotFound();
@@ -83,8 +92,10 @@ namespace SupplyChain.Web.Areas.BusinessPartner.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Entry(customer).State = EntityState.Modified;
-                db.SaveChanges();
+                //db.Entry(customer).State = EntityState.Modified;
+                //db.SaveChanges();
+                this.repository.Update<Customer>(customer);
+                this.repository.Save();
                 return RedirectToAction("Index");
             }
             return View(customer);
@@ -97,7 +108,8 @@ namespace SupplyChain.Web.Areas.BusinessPartner.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Customer customer = db.Customers.Find(id);
+            //Customer customer = db.Customers.Find(id);
+            var customer = this.repository.Find<Customer>(id);
             if (customer == null)
             {
                 return HttpNotFound();
@@ -110,9 +122,14 @@ namespace SupplyChain.Web.Areas.BusinessPartner.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Customer customer = db.Customers.Find(id);
-            db.Customers.Remove(customer);
-            db.SaveChanges();
+            //Customer customer = db.Customers.Find(id);
+            //db.Customers.Remove(customer);
+            //db.SaveChanges();
+
+            var customer = this.repository.Find<Customer>(id);
+            this.repository.Delete<Customer>(customer);
+            this.repository.Save();
+
             return RedirectToAction("Index");
         }
 
@@ -121,6 +138,7 @@ namespace SupplyChain.Web.Areas.BusinessPartner.Controllers
             if (disposing)
             {
                 db.Dispose();
+                (this.repository as IDisposable).Dispose();
             }
             base.Dispose(disposing);
         }
