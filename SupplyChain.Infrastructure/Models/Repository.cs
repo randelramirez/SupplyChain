@@ -11,7 +11,6 @@ namespace SupplyChain.Infrastructure.Models
 {
     public class Repository : IRepository, IDisposable
     {
-        // TO DO: method overload of GetAll that accepts an include expression
 
         public Repository()
         {
@@ -19,12 +18,23 @@ namespace SupplyChain.Infrastructure.Models
 
         private SupplyChainContext context = new SupplyChainContext();
 
-        public IQueryable<T> GetAll<T>() where T : class, new()
+        public IQueryable<T> All<T>() where T : class, new()
         {
             return this.context.Set<T>();
         }
 
-        public T GetSingle<T>(Func<T,bool> predicate) where T : class, new()
+        public IQueryable<T> All<T>(params Expression<Func<T, object>>[] includeProperties) where T : class, new()
+        {
+            var query = this.context.Set<T>().AsQueryable();
+            foreach (var includeProperty in includeProperties)
+            {
+                query = query.Include(includeProperty);
+            }
+
+            return query;
+        }
+
+        public T Single<T>(Func<T,bool> predicate) where T : class, new()
         {
             return this.context.Set<T>().Single(predicate);
         }
@@ -53,23 +63,6 @@ namespace SupplyChain.Infrastructure.Models
         public int Save()
         {
             return this.context.SaveChanges();
-        }
-
-        //TO DO
-        public IQueryable<Customer> All123<T>(params Expression<Func<T, object>>[] expression) where T: class, new()
-        {
-            //var query = this.context.Set<T>().AsQueryable();
-            ////return this.context.Set<T>();//.Include("");
-            ////this.context.Products.Include(expression);
-            //foreach (var inc in expression)
-            //{
-            //    query = query.Include(inc);
-            //}
-
-            //return query.AsQueryable();
-
-            var query = this.context.Customers.Include(m => m.SalesOrder);
-            return query;
         }
 
         public void Dispose()
