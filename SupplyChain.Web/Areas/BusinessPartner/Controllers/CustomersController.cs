@@ -20,7 +20,7 @@ namespace SupplyChain.Web.Areas.BusinessPartner.Controllers
         public ActionResult Index()
         {
             var x = this.repository.GetAll<SalesOrderHeader>().ToList();
-          
+          //TO DO
             var customers = //this.repository.GetAll<Customer>();
             new Repository().All123<Customer>(m => m.SalesOrder);
             return View(customers);

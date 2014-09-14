@@ -55,6 +55,7 @@ namespace SupplyChain.Infrastructure.Models
             return this.context.SaveChanges();
         }
 
+        //TO DO
         public IQueryable<Customer> All123<T>(params Expression<Func<T, object>>[] expression) where T: class, new()
         {
             //var query = this.context.Set<T>().AsQueryable();
