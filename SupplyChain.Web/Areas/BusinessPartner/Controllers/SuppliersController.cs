@@ -13,7 +13,7 @@ namespace SupplyChain.Web.Areas.BusinessPartner.Controllers
 {
     public class SuppliersController : Controller
     {
-        private SupplyChainContext db = new SupplyChainContext();
+        private OldSupplyChainContext db = new OldSupplyChainContext();
 
         // GET: BusinessPartner/Suppliers
         public ActionResult Index()

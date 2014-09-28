@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace SupplyChain.Core.Models
 {
-    public class Product : ILog
+    public class Product : ILogInfo, IObjectWithState
     {
         public Product()
         {
@@ -26,6 +27,9 @@ namespace SupplyChain.Core.Models
 
 
         public DateTime CreatedAt { get; set; }
+
+        [NotMapped]
+        public State State { get; set; }
 
     }
 }

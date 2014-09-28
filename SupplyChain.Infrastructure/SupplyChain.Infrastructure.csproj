@@ -49,16 +49,26 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Extensions\EntityStateHelper.cs" />
+    <Compile Include="Models\BaseContext.cs" />
+    <Compile Include="Extensions\ContextExtension.cs" />
     <Compile Include="DataInitializer\CustomerDataInitializer.cs" />
     <Compile Include="DataInitializer\ProductDataInitializer.cs" />
     <Compile Include="DataInitializer\SupplierDataInitializer.cs" />
     <Compile Include="DataInitializer\SupplyChainDataInitializer.cs" />
-    <Compile Include="Models\Repository.cs">
+    <Compile Include="Models\IContext.cs" />
+    <Compile Include="Models\IOldRepository.cs" />
+    <Compile Include="Models\IRepository.cs" />
+    <Compile Include="Models\IUnitOfWork.cs" />
+    <Compile Include="Models\OldRepository.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Models\SupplyChainContext.cs">
+    <Compile Include="Models\OldSupplyChainContext.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Models\Repository.cs" />
+    <Compile Include="Models\SupplyChainContext.cs" />
+    <Compile Include="Models\UnitOfWork.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

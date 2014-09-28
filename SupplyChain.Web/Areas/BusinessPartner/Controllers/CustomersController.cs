@@ -13,8 +13,16 @@ namespace SupplyChain.Web.Areas.BusinessPartner.Controllers
 {
     public class CustomersController : Controller
     {
-        private SupplyChainContext db = new SupplyChainContext();
-        private IRepository repository = new Repository();
+        //private OldSupplyChainContext db = new OldSupplyChainContext();
+        //private IOldRepository repository = new OldRepository();
+        private IUnitOfWork uow;// = new UnitOfWork<SupplyChainContext>();
+        private IRepository repository;// = new Repository(new UnitOfWork<SupplyChainContext>());
+
+        public CustomersController()
+        {
+            this.uow = new UnitOfWork<SupplyChainContext>();
+            this.repository = new Repository(uow);
+        }
 
         // GET: BusinessPartner/Customers
         public ActionResult Index()
@@ -31,7 +39,7 @@ namespace SupplyChain.Web.Areas.BusinessPartner.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Customer customer = db.Customers.Find(id);
+            Customer customer = this.repository.Find<Customer>(id);
             if (customer == null)
             {
                 return HttpNotFound();
@@ -57,7 +65,7 @@ namespace SupplyChain.Web.Areas.BusinessPartner.Controllers
                 //db.Customers.Add(customer);
                 //db.SaveChanges();
                 this.repository.Add<Customer>(customer);
-                this.repository.Save();
+                this.uow.Save();
                 return RedirectToAction("Index");
             }
 
@@ -92,7 +100,7 @@ namespace SupplyChain.Web.Areas.BusinessPartner.Controllers
                 //db.Entry(customer).State = EntityState.Modified;
                 //db.SaveChanges();
                 this.repository.Update<Customer>(customer);
-                this.repository.Save();
+                this.uow.Save();
                 return RedirectToAction("Index");
             }
             return View(customer);
@@ -125,7 +133,7 @@ namespace SupplyChain.Web.Areas.BusinessPartner.Controllers
 
             var customer = this.repository.Find<Customer>(id);
             this.repository.Delete<Customer>(customer);
-            this.repository.Save();
+            this.uow.Save();
 
             return RedirectToAction("Index");
         }
@@ -134,7 +142,7 @@ namespace SupplyChain.Web.Areas.BusinessPartner.Controllers
         {
             if (disposing)
             {
-                db.Dispose();
+                this.uow.Dispose();
                 (this.repository as IDisposable).Dispose();
             }
             base.Dispose(disposing);

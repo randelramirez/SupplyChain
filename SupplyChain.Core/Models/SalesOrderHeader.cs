@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace SupplyChain.Core.Models
 {
-    public class SalesOrderHeader : ILog
+    public class SalesOrderHeader : ILogInfo, IObjectWithState
     {
         public SalesOrderHeader()
         {
@@ -27,6 +28,9 @@ namespace SupplyChain.Core.Models
         public virtual Customer Customer { get; set; }
 
         public virtual ICollection<SalesOrderDetail> SalesOrderDetails { get; set; }
+
+        [NotMapped]
+        public State State { get; set; }
        
     }
 }

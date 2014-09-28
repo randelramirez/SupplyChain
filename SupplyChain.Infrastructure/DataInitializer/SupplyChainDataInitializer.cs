@@ -8,9 +8,9 @@ using System.Threading.Tasks;
 
 namespace SupplyChain.Infrastructure.DataInitializer
 {
-    public class SupplyChainDataInitializer : DropCreateDatabaseIfModelChanges<SupplyChainContext>
+    public class SupplyChainDataInitializer : DropCreateDatabaseIfModelChanges<OldSupplyChainContext>
     {
-        protected override void Seed(SupplyChainContext context)
+        protected override void Seed(OldSupplyChainContext context)
         {
             //base.Seed(context);
             var customers = CustomerDataInitializer.CreateCustomers();

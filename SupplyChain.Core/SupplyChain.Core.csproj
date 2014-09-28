@@ -31,6 +31,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -41,8 +42,8 @@
   <ItemGroup>
     <Compile Include="Models\BusinessPartner.cs" />
     <Compile Include="Models\Customer.cs" />
-    <Compile Include="Models\ILog.cs" />
-    <Compile Include="Models\IRepository.cs" />
+    <Compile Include="Models\ILogInfo.cs" />
+    <Compile Include="Models\IObjectWithState.cs" />
     <Compile Include="Models\Product.cs" />
     <Compile Include="Models\SalesOrderDetail.cs" />
     <Compile Include="Models\SalesOrderHeader.cs" />

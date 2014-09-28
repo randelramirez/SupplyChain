@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SupplyChain.Core.Models
 {
-    public interface ILog
+    public interface ILogInfo
     {
         DateTime LastModified { get; set; }
 

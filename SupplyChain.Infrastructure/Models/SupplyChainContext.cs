@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace SupplyChain.Infrastructure.Models
 {
-    public class SupplyChainContext : DbContext
+    public class SupplyChainContext : DbContext, IContext
     {
         public SupplyChainContext()
         {
@@ -18,7 +18,7 @@ namespace SupplyChain.Infrastructure.Models
 
         static SupplyChainContext()
         {
-            Database.SetInitializer<SupplyChainContext>(new SupplyChainDataInitializer());
+            Database.SetInitializer<OldSupplyChainContext>(new SupplyChainDataInitializer());
         }
 
         public DbSet<Customer> Customers { get; set; }
@@ -40,7 +40,18 @@ namespace SupplyChain.Infrastructure.Models
             {
                 //m.MapInheritedProperties();
                 m.ToTable("Suppliers");
-            });            
+            });
+        }
+
+
+        public void SetModified(object entity)
+        {
+            Entry(entity).State = EntityState.Modified;
+        }
+
+        public void SetAdd(object entity)
+        {
+            Entry(entity).State = EntityState.Added;
         }
     }
 }

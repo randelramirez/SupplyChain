@@ -5,9 +5,9 @@ using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SupplyChain.Core.Models
+namespace SupplyChain.Infrastructure.Models
 {
-    public interface IRepository
+    public interface IOldRepository
     {
         IQueryable<T> All<T>() where T: class, new();
 
