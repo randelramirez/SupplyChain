@@ -13,8 +13,6 @@ namespace SupplyChain.Web.Areas.BusinessPartner.Controllers
 {
     public class CustomersController : Controller
     {
-        //private OldSupplyChainContext db = new OldSupplyChainContext();
-        //private IOldRepository repository = new OldRepository();
         private IUnitOfWork uow;// = new UnitOfWork<SupplyChainContext>();
         private IRepository repository;// = new Repository(new UnitOfWork<SupplyChainContext>());
 
@@ -27,7 +25,6 @@ namespace SupplyChain.Web.Areas.BusinessPartner.Controllers
         // GET: BusinessPartner/Customers
         public ActionResult Index()
         {
-            //var customers = this.repository.All<Customer>();
             var customers = this.repository.All<Customer>(c => c.SalesOrder);
             return View(customers);
         }
@@ -64,7 +61,7 @@ namespace SupplyChain.Web.Areas.BusinessPartner.Controllers
             {
                 //db.Customers.Add(customer);
                 //db.SaveChanges();
-                this.repository.Add<Customer>(customer);
+                this.repository.InsertOrUpdate<Customer>(customer);
                 this.uow.Save();
                 return RedirectToAction("Index");
             }
@@ -97,9 +94,7 @@ namespace SupplyChain.Web.Areas.BusinessPartner.Controllers
         {
             if (ModelState.IsValid)
             {
-                //db.Entry(customer).State = EntityState.Modified;
-                //db.SaveChanges();
-                this.repository.Update<Customer>(customer);
+                this.repository.InsertOrUpdate<Customer>(customer);
                 this.uow.Save();
                 return RedirectToAction("Index");
             }
@@ -113,7 +108,7 @@ namespace SupplyChain.Web.Areas.BusinessPartner.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            //Customer customer = db.Customers.Find(id);
+
             var customer = this.repository.Find<Customer>(id);
             if (customer == null)
             {
@@ -127,10 +122,6 @@ namespace SupplyChain.Web.Areas.BusinessPartner.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            //Customer customer = db.Customers.Find(id);
-            //db.Customers.Remove(customer);
-            //db.SaveChanges();
-
             var customer = this.repository.Find<Customer>(id);
             this.repository.Delete<Customer>(customer);
             this.uow.Save();

@@ -11,31 +11,31 @@ namespace SupplyChain.Infrastructure.Models
     public class UnitOfWork<TContext> : IUnitOfWork
       where TContext : IContext, new()
     {
-        private readonly IContext _context;
+        private readonly IContext context;
 
         public UnitOfWork()
         {
-            _context = new TContext();
+            this.context = new TContext();
         }
 
         public UnitOfWork(IContext context)
         {
-            _context = context;
+            this.context = context;
         }
         public int Save()
         {
             (this.Context as DbContext).ApplyLogChanges();
-            return _context.SaveChanges();
+            return context.SaveChanges();
         }
 
         public IContext Context
         {
-            get { return (TContext)_context; }
+            get { return (TContext)context; }
         }
 
         public void Dispose()
         {
-            _context.Dispose();
+            this.context.Dispose();
         }
     }
 }

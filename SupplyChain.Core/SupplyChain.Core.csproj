@@ -42,6 +42,7 @@
   <ItemGroup>
     <Compile Include="Models\BusinessPartner.cs" />
     <Compile Include="Models\Customer.cs" />
+    <Compile Include="Models\IEntity.cs" />
     <Compile Include="Models\ILogInfo.cs" />
     <Compile Include="Models\IObjectWithState.cs" />
     <Compile Include="Models\Product.cs" />

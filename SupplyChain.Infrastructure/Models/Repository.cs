@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Data.Entity;
+using SupplyChain.Core.Models;
+using SupplyChain.Infrastructure.Extensions;
 
 namespace SupplyChain.Infrastructure.Models
 {
@@ -42,28 +44,43 @@ namespace SupplyChain.Infrastructure.Models
             return this.uow.Context.Set<T>().Find(id);
         }
 
-        public void Add<T>(T entity) where T : class, new()
+        public void InsertOrUpdateGraph<T>(T entity) where T : class, IEntity<int>, new()
         {
-            this.uow.Context.Set<T>().Add(entity);
+            if (entity.State == State.Added)
+            {
+                this.uow.Context.Set<T>().Add(entity);
+            }
+            else
+            {
+                this.uow.Context.Set<T>().Add(entity);
+                (this.uow.Context as DbContext).ApplyStateChanges();
+            }
         }
 
-        public void Update<T>(T entity) where T : class, new()
+        public void InsertOrUpdate<T>(T entity) where T : class, IEntity<int>, new()
         {
-            //this.context.Set<T>().Attach(model);
-            var context = (this.uow.Context as DbContext);
-            context.Entry(entity).State = EntityState.Modified;
+            if (entity.Id == default(int)) // New entity
+            {
+                (this.uow.Context as DbContext).Entry(entity).State = EntityState.Added;
+            }
+            else        // Existing entity
+            {
+                (this.uow.Context as DbContext).Entry(entity).State = EntityState.Modified;
+
+            }
         }
 
         public void Delete<T>(T entity) where T : class, new()
         {
-            this.uow.Context.Set<T>().Remove(entity);
+            throw new NotImplementedException();
         }
 
         public void Dispose()
         {
             // TO DO check what to dispose, check if unit of work is disposable
             // try disposing the uow.context
-           
+            this.uow.Dispose();
+            this.uow.Context.Dispose();
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SupplyChain.Core.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
@@ -17,9 +18,9 @@ namespace SupplyChain.Infrastructure.Models
 
         T Find<T>(int? id) where T : class, new();
 
-        void Add<T>(T entity) where T : class, new();
+        void InsertOrUpdateGraph<T>(T entity) where T : class, IEntity<int>, new();
 
-        void Update<T>(T entity) where T : class, new();
+        void InsertOrUpdate<T>(T entity) where T: class, IEntity<int> , new();
 
         void Delete<T>(T entity) where T : class, new();
 

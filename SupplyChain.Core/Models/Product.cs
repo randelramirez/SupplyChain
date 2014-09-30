@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace SupplyChain.Core.Models
 {
-    public class Product : ILogInfo, IObjectWithState
+    public class Product : IEntity<int>, IObjectWithState
     {
         public Product()
         {

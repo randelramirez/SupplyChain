@@ -8,7 +8,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace SupplyChain.Core.Models
 {
-    public class BusinessPartner : ILogInfo, IObjectWithState
+    public class BusinessPartner : IEntity<int>, IObjectWithState
     {
         public BusinessPartner()
         {

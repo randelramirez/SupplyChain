@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace SupplyChain.Core.Models
 {
-    public class SalesOrderHeader : ILogInfo, IObjectWithState
+    public class SalesOrderHeader : IEntity<int>, IObjectWithState
     {
         public SalesOrderHeader()
         {
